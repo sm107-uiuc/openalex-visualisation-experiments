@@ -80,3 +80,5 @@ export class SnowflakeConnector {
       }
     }).catch(() => {});
 }
+
+module.exports = new SnowflakeConnector();
