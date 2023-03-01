@@ -4,7 +4,6 @@ import { Pool } from 'generic-pool';
 export class SnowflakeConnector {
     public connectionPool:Pool<snowflake.Connection>;
     constructor() { 
-      snowflake.configure({ ocspFailOpen: false, logLevel:"DEBUG", insecureConnect:true });
       const initializeEnvironment = {
               account: ACCOUNT,
               username: USERNAME, 
@@ -18,7 +17,7 @@ export class SnowflakeConnector {
         max: 10, // specifies the maximum number of connections in the pool
         min: 0   // specifies the minimum number of connections in the pool
       }
-      snowflake.configure({ ocspFailOpen: false, logLevel:"DEBUG", insecureConnect:true });
+      snowflake.configure({ ocspFailOpen: false, logLevel:"DEBUG"});
       this.connectionPool =  snowflake.createPool(initializeEnvironment, poolOptions);
     }
 
