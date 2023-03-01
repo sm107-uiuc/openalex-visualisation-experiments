@@ -1,11 +1,19 @@
 import * as snowflake from 'snowflake-sdk';
-import { snowflakeConfig } from '@/config';
+import { ACCOUNT, USERNAME, PASSWORD, WAREHOUSE, ROLE, DATABASE, SCHEMA} from '@/config';
 import { Pool } from 'generic-pool';
 export class SnowflakeConnector {
     public connectionPool:Pool<snowflake.Connection>;
     constructor() { 
       snowflake.configure({ ocspFailOpen: false, logLevel:"DEBUG", insecureConnect:true });
-      const initializeEnvironment = snowflakeConfig;
+      const initializeEnvironment = {
+              account: ACCOUNT,
+              username: USERNAME, 
+              password: PASSWORD,
+              warehouse: WAREHOUSE,
+              role: ROLE,
+              database: DATABASE,
+              schema: SCHEMA // Create a role for API calls
+      };
       const poolOptions = {
         max: 10, // specifies the maximum number of connections in the pool
         min: 0   // specifies the minimum number of connections in the pool
